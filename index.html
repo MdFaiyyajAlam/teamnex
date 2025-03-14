@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recovery Team - Nex</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0f0f0f;
+            overflow-x: hidden;
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #00ff88, #00b4d8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 3s ease infinite;
+            background-size: 200% 200%;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .flame-bg {
+            background: linear-gradient(135deg, #00ff88 0%, #00b4d8 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .flame-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,255,136,0.1);
+        }
+        .card-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.5s;
+        }
+        .card-hover:hover::before {
+            left: 100%;
+        }
+        .hero-bg {
+            background-image: url('images/background-image.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .glow {
+            box-shadow: 0 0 20px rgba(0,255,136,0.3);
+        }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: particle 3s linear infinite;
+        }
+        @keyframes particle {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(0); opacity: 0; }
+        }
+        .typing-text {
+            border-right: 2px solid #00ff88;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: blink 0.75s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #00ff88; }
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .count-up {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #00ff88;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center px-4 py-20 relative overflow-hidden hero-bg">
+        <div id="particles"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80"></div>
+        <div class="container mx-auto text-center relative z-10">
+            <div class="floating">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 gradient-text">
+                    𝐑𝐞𝐜𝐨𝐯𝐞𝐫𝐲 𝐁𝐲 - Nex
+                </h1>
+            </div>
+            <p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto typing-text" id="typing-text">
+                Join And Get Best Results
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://t.me/+Lz_Fyl9WDadiNzU9" class="flame-bg text-black px-8 py-4 rounded-full font-semibold text-lg transition-all hover:shadow-lg hover:shadow-[#00ff88]/30 flex items-center justify-center gap-2 glow">
+                    <i class="fab fa-telegram"></i>
+                    Join Now
+                </a>
+                <a href="#features" class="glass-effect text-white px-8 py-4 rounded-full font-semibold text-lg transition-all hover:bg-white/20 flex items-center justify-center gap-2">
+                    See Result
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-12 px-4 bg-black/40">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center fade-in">
+                    <div class="count-up" data-target="1000">0</div>
+                    <p class="text-gray-300">Happy Clients</p>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="count-up" data-target="95">0</div>
+                    <p class="text-gray-300">Success Rate</p>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="count-up" data-target="24">0</div>
+                    <p class="text-gray-300">Hours Support</p>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="count-up" data-target="100">0</div>
+                    <p class="text-gray-300">Recovered</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-4 relative">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 gradient-text fade-in">Lets Win</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-effect p-8 rounded-2xl card-hover fade-in">
+                    <div class="text-[#00ff88] text-4xl mb-6 floating">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Fast Recovery</h3>
+                    <p class="text-gray-300">Get your losses recovered quickly with our proven strategies and expert team.</p>
+                </div>
+                <div class="glass-effect p-8 rounded-2xl card-hover fade-in">
+                    <div class="text-[#00ff88] text-4xl mb-6 floating" style="animation-delay: 0.2s;">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Secure Process</h3>
+                    <p class="text-gray-300">Your data and transactions are protected with advanced security measures.</p>
+                </div>
+                <div class="glass-effect p-8 rounded-2xl card-hover fade-in">
+                    <div class="text-[#00ff88] text-4xl mb-6 floating" style="animation-delay: 0.4s;">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Guaranteed Results</h3>
+                    <p class="text-gray-300">We ensure the best possible outcome for your recovery process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4 bg-gradient-to-b from-transparent to-[#00b4d8]/10 relative">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 gradient-text fade-in">Join now See Result</h2>
+            <p class="text-xl text-gray-200 mb-8 max-w-2xl mx-auto fade-in">
+                Don't wait any longer. Join our team and start your recovery journey today.
+            </p>
+            <a href="https://t.me/+Lz_Fyl9WDadiNzU9" class="inline-flex items-center gap-2 flame-bg text-black px-8 py-4 rounded-full font-semibold text-lg transition-all hover:shadow-lg hover:shadow-[#00ff88]/30 glow fade-in">
+                <i class="fab fa-telegram"></i>
+                Join Telegram Channel
+            </a>
+        </div>
+    </section>
+
+    <!-- Disclaimer Section -->
+    <section class="py-12 px-4 glass-effect">
+        <div class="container mx-auto text-center text-sm text-gray-300">
+            <p>This site is not a part of the Facebook. This page and its content are not affiliated with, endorsed, or sponsored by Facebook in any way.</p>
+            <p class="mt-2">Information on this page is for informational and promotional use only. Results may vary, and we do not guarantee specific outcomes.</p>
+            <p class="mt-2">For details on data handling and security, please review our Privacy Policy and Terms of Service before proceeding.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black/80 py-8 px-4">
+        <div class="container mx-auto text-center text-gray-300">
+            <p>Ad Managed By – Faizi</p>
+            <p class="mt-2">&copy; 2025, Faizi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-8 right-8 bg-[#00ff88] text-black p-3 rounded-full shadow-lg hover:bg-[#00b4d8] transition-colors glow">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Particle effect
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Typing effect
+        const texts = [
+            "Join And Get Best Results",
+            "Fast Recovery Guaranteed",
+            "Expert Team Support",
+            "Secure Process"
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+        const typingText = document.getElementById('typing-text');
+
+        function type() {
+            if (charIndex < texts[textIndex].length) {
+                typingText.textContent += texts[textIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, 100);
+            } else {
+                setTimeout(erase, 2000);
+            }
+        }
+
+        function erase() {
+            if (charIndex > 0) {
+                typingText.textContent = texts[textIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, 50);
+            } else {
+                textIndex = (textIndex + 1) % texts.length;
+                setTimeout(type, 500);
+            }
+        }
+        type();
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Fade in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Count up animation
+        const countUpElements = document.querySelectorAll('.count-up');
+        const countObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    const targetNumber = parseInt(target.getAttribute('data-target'));
+                    let currentNumber = 0;
+                    const increment = targetNumber / 100;
+                    const duration = 2000; // 2 seconds
+                    const stepTime = duration / 100;
+
+                    const countUp = () => {
+                        currentNumber += increment;
+                        if (currentNumber < targetNumber) {
+                            target.textContent = Math.round(currentNumber);
+                            setTimeout(countUp, stepTime);
+                        } else {
+                            target.textContent = targetNumber;
+                        }
+                    };
+
+                    countUp();
+                    countObserver.unobserve(target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        countUpElements.forEach(element => {
+            countObserver.observe(element);
+        });
+    </script>
+</body>
+</html> 
